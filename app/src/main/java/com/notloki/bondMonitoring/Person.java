@@ -1,10 +1,10 @@
 package com.notloki.bondMonitoring;
 
 public class Person {
-    private String last_name;
-    private String phone;
-    private String lang;
-    private String ivr_code;
+    private final String last_name;
+    private final String phone;
+    private final String lang;
+    private final String ivr_code;
 
     public Person(String last_name, String phone, String lang, String ivr_code) {
         this.last_name = last_name;

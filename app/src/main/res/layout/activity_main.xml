@@ -64,4 +64,27 @@
         app:layout_constraintEnd_toStartOf="@+id/button2"
         app:layout_constraintStart_toEndOf="@+id/debugSwitch" />
 
+    <com.google.android.material.switchmaterial.SwitchMaterial
+        android:id="@+id/mainAutoSched"
+        style="@style/Theme.BondMonitoring"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="178dp"
+        android:contentDescription="@string/auto_description"
+        android:enabled="true"
+        android:onClick="onClickAuto"
+        android:saveEnabled="true"
+        android:text="@string/auto"
+        android:textAlignment="viewStart"
+        android:textColorHighlight="#303F9F"
+        android:textColorLink="#1976D2"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@+id/button2"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

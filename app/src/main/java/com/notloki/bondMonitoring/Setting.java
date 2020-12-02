@@ -10,11 +10,13 @@ public class Setting {
     private int test;
     private String date;
     private boolean debug;
+    private boolean auto;
 
 
     public Setting() {
         this(0, (new SimpleDateFormat("MM.dd.yyyy", Locale.US)
-                .format(Calendar.getInstance().getTime())),true);
+                .format(Calendar.getInstance().getTime())),false, false);
+
     }
     public Setting(boolean debug){
         this.debug = debug;
@@ -28,10 +30,11 @@ public class Setting {
     }
 
 
-    public Setting(int test, String date, boolean debug) {
+    public Setting(int test, String date, boolean debug, boolean auto) {
         this.test = test;
         this.date = date;
         this.debug = debug;
+        this.auto = auto;
     }
 
 
@@ -48,9 +51,13 @@ public class Setting {
         return debug;
     }
 
-    public void setTest(int test) {
-        this.test = test;
+    public boolean isAuto() {
+        return auto;
     }
+
+    public void setAuto(boolean auto) { this.auto = auto; }
+
+    public void setTest(int test) { this.test = test; }
 
     public void setDate(String date) {
         this.date = date;

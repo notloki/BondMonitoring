@@ -1,15 +1,23 @@
 package com.notloki.bondMonitoring;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
+import android.content.ContentProvider;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.AttributeSet;
 import android.view.View;
-
+import android.content.ContentProvider;
 import com.google.android.material.switchmaterial.SwitchMaterial;
 
+import static com.notloki.bondMonitoring.SettingStorage.loadAuto;
 import static com.notloki.bondMonitoring.SettingStorage.loadDebug;
+import static com.notloki.bondMonitoring.SettingStorage.saveAuto;
 import static com.notloki.bondMonitoring.SettingStorage.saveDebug;
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -19,8 +27,13 @@ public class MainActivity extends AppCompatActivity {
 //    public static final String LANG="en";
 
     public static final String URL="https://sentry.cordanths.com/Sentry/WebCheckin/Log";
-    public static boolean debug;
-    public static SwitchMaterial switchMaterial;
+    public static boolean debugVar;
+    public static boolean autoVar;
+    public static SwitchMaterial debugButton;
+    public static SwitchMaterial autoButton;
+
+
+
 
 
     @Override
@@ -29,34 +42,28 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
-
-
     }
-    protected  void onStart() {
+
+    @Override
+    protected void onStart() {
         super.onStart();
 
     }
 
-
-
     @Override
     protected void onResume() {
-
-//        switchMaterial = findViewById(R.id.debugSwitch);
-//        switchMaterial.setChecked(loadDebug(getApplicationContext()));
 
         super.onResume();
         loadFromDisk();
 
     }
-
+    @Override
     protected void onPause() {
 
         super.onPause();
 
     }
-
+    @Override
     protected void onStop() {
 
         super.onStop();
@@ -73,14 +80,18 @@ public class MainActivity extends AppCompatActivity {
 
     private void saveToDisk() {
 
-        saveDebug(debug, getApplicationContext());
+        saveDebug(debugVar, this);
+        saveAuto(autoVar, this);
 
     }
     private void loadFromDisk() {
 
-        debug = loadDebug(getApplicationContext());
-        switchMaterial = findViewById(R.id.debugSwitch);
-        switchMaterial.setChecked(debug);
+        autoVar = loadAuto(this);
+        debugVar = loadDebug(this);
+        debugButton = findViewById(R.id.debugSwitch);
+        debugButton.setChecked(debugVar);
+        autoButton = findViewById(R.id.mainAutoSched);
+        autoButton.setChecked(autoVar);
     }
 
 
@@ -105,14 +116,24 @@ public class MainActivity extends AppCompatActivity {
 
     public void onClickDebug(View view) {
 
-        switchMaterial = findViewById(R.id.debugSwitch);
-        debug = switchMaterial.isChecked();
+        debugButton = findViewById(R.id.debugSwitch);
+        debugVar = debugButton.isChecked();
         saveToDisk();
 
     }
-    private void saveAll(Object ohj) {
-        //Save
-    }
 
+    public void onClickAuto(View view) {
+        autoButton = findViewById(R.id.mainAutoSched);
+        autoVar = autoButton.isChecked();
+        saveToDisk();
+
+//        BondAlarm bondAlarm = new BondAlarm(new BondMonitoring().getContext());
+//        if (autoVar) {
+//            bondAlarm.setAlarm();
+//        } else {
+//            bondAlarm.cancelAlarm();
+//        }
+
+    }
 
 }

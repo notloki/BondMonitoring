@@ -17,12 +17,12 @@ public class SettingStorage {
     private static final String DEBUG_KEY = package_name + ".DEBUG_KEY";
     private static final String TEST_KEY = package_name + ".TEST_KEY";
     private static final String DATE_KEY = package_name + ".DATE_KEY";
-
+    private static final String AUTO_KEY = package_name + ".AUTO_KEY";
     public SettingStorage(Context ctx) {
         if (settingStore == null)
             settingStore = ctx.getSharedPreferences(SETTINGS_PREFS_NAME, Context.MODE_PRIVATE);
 
-        editor = settingStore.edit();
+
 
     }
 
@@ -30,11 +30,13 @@ public class SettingStorage {
         int test = settingStore.getInt(TEST_KEY, 0);
         String date = settingStore.getString(DATE_KEY, "");
         boolean debug = settingStore.getBoolean(DEBUG_KEY, false);
-        return new Setting(test, date, debug);
+        boolean auto = settingStore.getBoolean(AUTO_KEY, false);
+        return new Setting(test, date, debug, auto);
 
     }
 
     public static void saveDebug(boolean bool, Context ctx) {
+        editor = settingStore.edit();
         if(settingStore == null)
             settingStore = ctx.getSharedPreferences(SETTINGS_PREFS_NAME, Context.MODE_PRIVATE);
 
@@ -42,6 +44,16 @@ public class SettingStorage {
         editor.putBoolean(DEBUG_KEY, bool);
         editor.commit();
 
+    }
+
+    public static void saveAuto(boolean bool, Context ctx) {
+        editor = settingStore.edit();
+        if(settingStore == null)
+            settingStore = ctx.getSharedPreferences(SETTINGS_PREFS_NAME, Context.MODE_PRIVATE);
+
+         editor = settingStore.edit();
+         editor.putBoolean(AUTO_KEY, bool);
+         editor.commit();
     }
 
     public static boolean loadDebug(Context ctx) {
@@ -54,7 +66,18 @@ public class SettingStorage {
 
     }
 
+    public static boolean loadAuto(Context ctx) {
+
+        if(settingStore == null)
+            settingStore = ctx.getSharedPreferences(SETTINGS_PREFS_NAME, Context.MODE_PRIVATE);
+        Toast.makeText(ctx, "Loadin Auto value"
+                + settingStore.getBoolean(AUTO_KEY, false), Toast.LENGTH_LONG).show();
+        return settingStore.getBoolean(AUTO_KEY, false);
+
+    }
+
     public void settingSave(Setting setting) {
+        editor = settingStore.edit();
         if (setting == null)
             return;
 

@@ -9,6 +9,7 @@ import com.google.android.material.snackbar.Snackbar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.text.style.SuperscriptSpan;
 import android.view.View;
 
 public class BondHistory extends AppCompatActivity {
@@ -30,6 +31,13 @@ public class BondHistory extends AppCompatActivity {
                         .setAction("Share",this);
             }
         });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+
     }
 }
 

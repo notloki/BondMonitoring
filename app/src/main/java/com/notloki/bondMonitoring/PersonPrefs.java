@@ -19,8 +19,6 @@ public class PersonPrefs {
         if(settings == null) {
             settings = ctx.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
         }
-
-        editor = settings.edit();
     }
 
     public void savePerson(Person person, Context ctx)  {
