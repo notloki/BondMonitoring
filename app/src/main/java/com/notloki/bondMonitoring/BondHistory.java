@@ -1,5 +1,6 @@
 package com.notloki.bondMonitoring;
 
+import android.app.LauncherActivity;
 import android.os.Bundle;
 
 import com.google.android.material.appbar.CollapsingToolbarLayout;
@@ -8,9 +9,18 @@ import com.google.android.material.snackbar.Snackbar;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.text.style.SuperscriptSpan;
 import android.view.View;
+import android.widget.TextView;
+
+import java.io.Writer;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+
+
 
 public class BondHistory extends AppCompatActivity {
 
@@ -18,6 +28,7 @@ public class BondHistory extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bond_history);
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         CollapsingToolbarLayout toolBarLayout = (CollapsingToolbarLayout) findViewById(R.id.toolbar_layout);
@@ -35,6 +46,19 @@ public class BondHistory extends AppCompatActivity {
 
     @Override
     protected void onResume() {
+        TextView textView = findViewById(R.id.historyTextViewBody);
+        HistoryPrefs hp = new HistoryPrefs(getApplicationContext());
+        Collection<HistoryObj> col = new ArrayList<>(hp.loadTenHistories(getApplicationContext()));
+        while(col.iterator().hasNext()) {
+            HistoryObj hO = col.iterator().next();
+            textView.append(new StringBuilder().append(
+                    hO.getDate()).append(" ").append(
+                            hO.getText()).append(" ").append(
+                                    hO.getTransaction_key())
+                    );
+        }
+
+
         super.onResume();
 
 

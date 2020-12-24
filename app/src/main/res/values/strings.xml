@@ -130,7 +130,8 @@
     <string name="unknown">Unknown Error</string>
     <string name="history">History</string>
     <string name="shareDescription">Share History</string>
-    <string name="auto">Auto Schedule</string>
+    <string name="auto">Auto</string>
     <string name="auto_description">Turn on Auto Schedule to Make the app poll bondmonitoring automagicallly</string>
     <string name="loading">Loading...</string>
+    <string name="brian">Brian?</string>
 </resources>

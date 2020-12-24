@@ -14,22 +14,14 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.Calendar;
 
-public class BondAlarm extends AppCompatActivity {
-
-    @SuppressWarnings({"FieldMayBeFinal", "CanBeFinal"})
-    private Context appContext;
-
-    public BondAlarm(Context context) {
-        this.appContext = context;
-    }
-
-
+public  class BondAlarm {
 
     PendingIntent alarmIntent;
-    AlarmManager alarmMgr;
+    AlarmManager  alarmMgr;
 
 
-    public final void setAlarm() {
+    public final void setAlarm(Context appContext) {
+
         try { alarmMgr =
                 (AlarmManager) appContext.getSystemService(Context.ALARM_SERVICE);
               } catch (NullPointerException npe)
@@ -46,16 +38,23 @@ public class BondAlarm extends AppCompatActivity {
 
         // Enable Reboot Receiver
 
-        ComponentName receiver = new ComponentName(this, BondBroadcastReceiver.class);
-        PackageManager pm = this.getPackageManager();
-
-        pm.setComponentEnabledSetting(receiver,
-                PackageManager.COMPONENT_ENABLED_STATE_ENABLED,
-                PackageManager.DONT_KILL_APP);
-
+        ComponentName receiver = new ComponentName(appContext, BondBroadcastReceiver.class);
+        PackageManager pm = appContext.getPackageManager();
+        if(pm.getComponentEnabledSetting(receiver)== PackageManager.COMPONENT_ENABLED_STATE_DISABLED) {
+            pm.setComponentEnabledSetting(receiver,
+                    PackageManager.COMPONENT_ENABLED_STATE_ENABLED,
+                    PackageManager.DONT_KILL_APP);
+        }
     }
 
-    public final void cancelAlarm() {
+    public final void cancelAlarm(Context appContext) {
+        try { alarmMgr =
+                (AlarmManager) appContext.getSystemService(Context.ALARM_SERVICE);
+        } catch (NullPointerException npe)
+        {npe.printStackTrace();}
+
+        Intent intent = new Intent(appContext, BondBroadcastReceiver.class);
+        alarmIntent = PendingIntent.getBroadcast(appContext, 0, intent, 0);
 
         if (alarmMgr != null) {
             alarmMgr.cancel(alarmIntent);
@@ -64,22 +63,26 @@ public class BondAlarm extends AppCompatActivity {
         ComponentName receiver = null;
         PackageManager pm = null;
         try {
-            receiver = new ComponentName(this, BondBroadcastReceiver.class);
+            receiver = new ComponentName(appContext, BondBroadcastReceiver.class);
         } catch (NullPointerException npe) {
             npe.printStackTrace();
         }
 
         try {
-            pm = this.getPackageManager();
+            pm = appContext.getPackageManager();
         } catch (NullPointerException npe) {
             npe.printStackTrace();
         }
 
 
         try {
-            pm.setComponentEnabledSetting(receiver,
-                    PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
-                    PackageManager.DONT_KILL_APP);
+            if(pm.getComponentEnabledSetting(receiver) ==
+                    PackageManager.COMPONENT_ENABLED_STATE_ENABLED) {
+
+                pm.setComponentEnabledSetting(receiver,
+                        PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
+                        PackageManager.DONT_KILL_APP);
+            }
         } catch (NullPointerException npe) {
             npe.printStackTrace();
         }

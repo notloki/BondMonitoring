@@ -1,16 +1,11 @@
 package com.notloki.bondMonitoring;
 
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.app.Activity;
-import android.content.ContentProvider;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.AttributeSet;
 import android.view.View;
-import android.content.ContentProvider;
+
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.android.material.switchmaterial.SwitchMaterial;
 
 import static com.notloki.bondMonitoring.SettingStorage.loadAuto;
@@ -18,19 +13,22 @@ import static com.notloki.bondMonitoring.SettingStorage.loadDebug;
 import static com.notloki.bondMonitoring.SettingStorage.saveAuto;
 import static com.notloki.bondMonitoring.SettingStorage.saveDebug;
 
-
 public class MainActivity extends AppCompatActivity {
 
-//    public static final String LAST_NAME="Burke+Jr.";
-//    public static final String PHONE="8662072911";
-//    public static final String IVR_CODE="102874";
-//    public static final String LANG="en";
-
+    public static final String LAST_NAME="Burke+Jr.";
+    public static final String PHONE="8662072911";
+    public static final String IVR_CODE="102874";
+    public static final String LANG="en";
     public static final String URL="https://sentry.cordanths.com/Sentry/WebCheckin/Log";
+    public static final Setting brian = new Setting(LAST_NAME, PHONE, IVR_CODE, LANG);
+
+
     public static boolean debugVar;
     public static boolean autoVar;
     public static SwitchMaterial debugButton;
     public static SwitchMaterial autoButton;
+    public static SwitchMaterial isBrianButton;
+    public static boolean isBrian;
 
 
 
@@ -41,6 +39,10 @@ public class MainActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
+
+
 
     }
 
@@ -95,6 +97,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+    public void onClickBrian(View view) {
+        isBrianButton = (SwitchMaterial) findViewById(R.id.isBrianButtonXml);
+        isBrian = isBrianButton.isChecked();
+    }
+
     public void onClickResults(View view) {
 
         Intent intent = new Intent(this, ResultsActivity.class);
@@ -122,18 +129,18 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void onClickAuto(View view) {
-        autoButton = findViewById(R.id.mainAutoSched);
-        autoVar = autoButton.isChecked();
-        saveToDisk();
-
-//        BondAlarm bondAlarm = new BondAlarm(new BondMonitoring().getContext());
+    public void onClickAuto(View view){
+//        autoButton = findViewById(R.id.mainAutoSched);
+//        autoVar = autoButton.isChecked();
+//        saveToDisk();
+//        BondMonitoring bondMonitoring = new BondMonitoring();
+//        BondAlarm bondAlarm = new BondAlarm();
 //        if (autoVar) {
-//            bondAlarm.setAlarm();
+//            bondAlarm.setAlarm(bondMonitoring.getContext());
 //        } else {
-//            bondAlarm.cancelAlarm();
+//            bondAlarm.cancelAlarm(bondMonitoring.getContext());
 //        }
 
+        }
     }
 
-}
