@@ -6,31 +6,22 @@ import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.android.material.switchmaterial.SwitchMaterial;
 
+
+import static com.notloki.bondMonitoring.Ref.autoButton;
+import static com.notloki.bondMonitoring.Ref.autoVar;
+import static com.notloki.bondMonitoring.Ref.debugButton;
+import static com.notloki.bondMonitoring.Ref.debugVar;
+import static com.notloki.bondMonitoring.Ref.isBrianButton;
+import static com.notloki.bondMonitoring.Ref.lastChecked;
+import static com.notloki.bondMonitoring.Ref.isBrian;
 import static com.notloki.bondMonitoring.SettingStorage.loadAuto;
 import static com.notloki.bondMonitoring.SettingStorage.loadDebug;
+import static com.notloki.bondMonitoring.SettingStorage.loadLastChecked;
 import static com.notloki.bondMonitoring.SettingStorage.saveAuto;
 import static com.notloki.bondMonitoring.SettingStorage.saveDebug;
 
 public class MainActivity extends AppCompatActivity {
-
-    public static final String LAST_NAME="Burke+Jr.";
-    public static final String PHONE="8662072911";
-    public static final String IVR_CODE="102874";
-    public static final String LANG="en";
-    public static final String URL="https://sentry.cordanths.com/Sentry/WebCheckin/Log";
-    public static final Setting brian = new Setting(LAST_NAME, PHONE, IVR_CODE, LANG);
-
-
-    public static boolean debugVar;
-    public static boolean autoVar;
-    public static SwitchMaterial debugButton;
-    public static SwitchMaterial autoButton;
-    public static SwitchMaterial isBrianButton;
-    public static boolean isBrian;
-
-
 
 
 
@@ -94,11 +85,13 @@ public class MainActivity extends AppCompatActivity {
         debugButton.setChecked(debugVar);
         autoButton = findViewById(R.id.mainAutoSched);
         autoButton.setChecked(autoVar);
+        lastChecked = loadLastChecked(getApplicationContext());
     }
 
 
     public void onClickBrian(View view) {
-        isBrianButton = (SwitchMaterial) findViewById(R.id.isBrianButtonXml);
+        isBrianButton = findViewById(R.id.isBrianButtonXml);
+        isBrianButton.setSaveEnabled(true);
         isBrian = isBrianButton.isChecked();
     }
 

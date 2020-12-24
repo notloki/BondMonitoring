@@ -14,6 +14,8 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 
+import static com.notloki.bondMonitoring.Ref.brian;
+import static com.notloki.bondMonitoring.Ref.isBrian;
 import static com.notloki.bondMonitoring.SettingStorage.loadPerson;
 import static com.notloki.bondMonitoring.SettingStorage.savePerson;
 import static com.notloki.bondMonitoring.SettingStorage.savePersonLastName;
@@ -40,10 +42,13 @@ public class PersonSetup extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_person_setup);
 
-        last_name_box = (EditText) findViewById(R.id.person_name_editText);
-        phone_box = (EditText) findViewById(R.id.person_phone_editText);
-        ivr_box = (EditText) findViewById(R.id.person_ivr_editText);
-        lang_box = (EditText) findViewById(R.id.person_lang_editText);
+        if(isBrian)
+            currentPerson = brian;
+
+        last_name_box = findViewById(R.id.person_name_editText);
+        phone_box = findViewById(R.id.person_phone_editText);
+        ivr_box = findViewById(R.id.person_ivr_editText);
+        lang_box = findViewById(R.id.person_lang_editText);
 
         displayText(getCurrentPerson());
         last_name_box.setOnFocusChangeListener((view, bool) ->

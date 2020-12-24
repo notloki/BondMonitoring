@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/victor_garcia_orzdns2qkue_unsplash"
     tools:context=".MainActivity"
     tools:layout_editor_absoluteY="81dp">
 
@@ -15,8 +16,10 @@
         android:text="@string/button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.939"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.377" />
 
     <Button
         android:id="@+id/button2"
@@ -63,12 +66,13 @@
     <com.google.android.material.switchmaterial.SwitchMaterial
         android:id="@+id/mainAutoSched"
         style="@style/Theme.BondMonitoring"
-        android:layout_height="wrap_content"
         android:layout_width="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="216dp"
         android:contentDescription="@string/auto_description"
         android:enabled="true"
+        android:lineSpacingExtra="10sp"
         android:onClick="onClickAuto"
         android:saveEnabled="true"
         android:text="@string/auto"
@@ -84,12 +88,24 @@
         android:id="@+id/isBrianButtonXml"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:onClick="onClickBrian"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
+        android:onClick="onClickBrian"
         android:text="@string/brian"
         android:textSize="18sp"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/debugSwitch" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/bond" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

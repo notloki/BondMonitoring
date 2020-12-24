@@ -65,7 +65,7 @@ public class HistoryPrefs {
 
 
     }
-    public Collection<HistoryObj> loadTenHistories(Context ctx) {
+    public List<HistoryObj> loadTenHistories(Context ctx) {
         if(settings == null)
             settings = ctx.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
         int l_id = settings.getInt(LAST_ID_KEY, 0);

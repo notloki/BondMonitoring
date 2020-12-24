@@ -10,18 +10,24 @@
     tools:context=".BondHistory"
     tools:showIn="@layout/activity_bond_history">
 
-<!--    <ListView-->
-<!--        android:id="@+id/listView"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="match_parent"-->
-<!--        android:layout_margin="16dp"-->
 
-<!--        />-->
-
-    <TextView
-        android:id="@+id/historyTextViewBody"
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/text_margin" />
+        android:layout_margin="@dimen/text_margin">
+        <TextView
+            android:id="@+id/historyDate"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"/>
+        <TextView
+             android:id="@+id/text"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"/>
+        <TextView
+            android:id="@+id/transKey"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </com.google.android.material.card.MaterialCardView>
 
 </androidx.core.widget.NestedScrollView>

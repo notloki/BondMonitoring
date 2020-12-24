@@ -11,6 +11,6 @@ public class BondMonitoring extends Application {
     public Context getContext() {
 
 
-        return (Context) contentProvider.getContext();
+        return contentProvider.getContext();
     }
 }

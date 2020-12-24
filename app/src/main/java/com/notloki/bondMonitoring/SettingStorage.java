@@ -20,14 +20,14 @@ public class SettingStorage {
 
     StringBuilder sb = new StringBuilder();
 
-
-    private static final String DEBUG_KEY =  ".DEBUG_KEY";
+    private static final String LAST_CHECKED_KEY = "com.notloki.bondMonitoring.LAST_CHECKED_KEY";
+    private static final String DEBUG_KEY =  "com.notloki.bondMonitoring.DEBUG_KEY";
     private static final String AUTO_KEY = "com.notloki.bondMonitoring.AUTO_KEY";
     private static final String CHECKED_TODAY_KEY = "com.notloki.bondMonitoring.CHECKED_TODAY_KEY";
     private static final String LAST_NAME_KEY = "com.notloki.bondMonitoring.LAST_NAME_KEY";
-    private static final String PHONE_KEY = package_name + ".PHONE_KEY";
-    private static final String IVR_KEY = package_name + ".IVR_KEY";
-    private static final String LANG_KEY = package_name + ".LANG_KEY";
+    private static final String PHONE_KEY = "com.notloki.bondMonitoring.PHONE_KEY";
+    private static final String IVR_KEY = "com.notloki.bondMonitoring.IVR_KEY";
+    private static final String LANG_KEY = "com.notloki.bondMonitoring.LANG_KEY";
 
     public SettingStorage(Context ctx) {
         if (settingStore == null)
@@ -36,7 +36,7 @@ public class SettingStorage {
     }
 
     public Setting settingLoadAll() {
-    sb.append(package_name).append(".Key");
+
 
 
         boolean debug = settingStore.getBoolean(DEBUG_KEY, false);
@@ -112,7 +112,28 @@ public class SettingStorage {
          editor.apply();
     }
 
-    public void saveChecked(Context ctx, boolean bool) {
+    public static long loadLastChecked(Context ctx) {
+
+        if(settingStore == null)
+            settingStore = ctx.getSharedPreferences(SETTINGS_PREFS_NAME, Context.MODE_PRIVATE);
+
+        return settingStore.getLong(LAST_CHECKED_KEY, 0L);
+
+    }
+
+
+    public static void saveLastChecked(Context ctx, long lastChecked) {
+        editor = settingStore.edit();
+        if(settingStore == null)
+            settingStore = ctx.getSharedPreferences(SETTINGS_PREFS_NAME, Context.MODE_PRIVATE);
+
+        editor = settingStore.edit();
+        editor.putLong(LAST_CHECKED_KEY, lastChecked);
+        editor.apply();
+    }
+
+
+    public static void saveChecked(Context ctx, boolean bool) {
 
         if (settingStore == null)
             settingStore = ctx.getSharedPreferences(SETTINGS_PREFS_NAME, Context.MODE_PRIVATE);
