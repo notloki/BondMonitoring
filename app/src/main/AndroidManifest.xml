@@ -19,7 +19,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.BondMonitoring">
-        <activity android:name=".CheckBond"></activity>
+        <activity android:name=".ResultsActivity2"></activity>
+        <activity android:name=".CheckBond" />
         <activity
             android:name=".BondHistory"
             android:label="@string/title_activity_bond_history"

@@ -1,11 +1,21 @@
 package com.notloki.bondMonitoring;
 
+import android.app.Application;
+import android.content.ContentProvider;
+import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.text.format.DateUtils;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Lifecycle;
 
@@ -26,8 +36,20 @@ import static com.notloki.bondMonitoring.Ref.resultsCache;
 public class ResultsActivity extends AppCompatActivity {
 
 //    public static String results;
+    Context activityContext = this;
+    Context applicationContext = getApplicationContext();
 
-    TextView textView;
+    public  Context getActivityContext() {
+        return activityContext;
+    }
+
+    public Context getApplicationContext() { return applicationContext;
+
+    }
+    public final ResultsActivity resultsActivity = new ResultsActivity();
+
+
+    public TextView textView;
 
     public String getResultText() {
         return resultText;
@@ -37,6 +59,9 @@ public class ResultsActivity extends AppCompatActivity {
 
     @Override
     protected final void onCreate(Bundle savedInstanceState) {
+
+
+
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_results);
@@ -72,8 +97,8 @@ public class ResultsActivity extends AppCompatActivity {
 
 
 
-//   displayResults();
-
+ /*  displayResults("loading");
+   displayResults(resultText);     */
     }  //here
 
 
@@ -131,7 +156,6 @@ public class ResultsActivity extends AppCompatActivity {
 
     @Override
     protected void onDestroy() {
-
         super.onDestroy();
     }
 

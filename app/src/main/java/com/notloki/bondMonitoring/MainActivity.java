@@ -21,19 +21,27 @@ import static com.notloki.bondMonitoring.SettingStorage.loadLastChecked;
 import static com.notloki.bondMonitoring.SettingStorage.saveAuto;
 import static com.notloki.bondMonitoring.SettingStorage.saveDebug;
 
+
 public class MainActivity extends AppCompatActivity {
+
+    public final MainActivity mainActivity = new MainActivity();
+    public final ResultsActivity resultsActivity = new ResultsActivity();
 
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
+        if(mainActivity.getApplicationContext() ==
+                resultsActivity.getApplicationContext()) {
+            System.out.println("SAME");
+        }
+        if(mainActivity.getApplicationContext() == this)
+            System.out.println("wierd");
+
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-
-
-
 
     }
 

@@ -1,6 +1,8 @@
 package com.notloki.bondMonitoring;
 
 import android.content.Context;
+import android.os.Handler;
+import android.os.Looper;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -21,14 +23,15 @@ import static com.notloki.bondMonitoring.Ref.URL;
 import static com.notloki.bondMonitoring.Ref.debugVar;
 import static com.notloki.bondMonitoring.Ref.resultText;
 
-public class CheckBond extends ResultsActivity {
+public class CheckBond {
 
     OkHttpClient client = new OkHttpClient();
-    private Context ctx;
+    Context ctx;
+    private final Handler mHandler = new Handler(Looper.getMainLooper());
 
 
-    public void checkBond( String last_name, String phone,
-                           String ivr_code, String lang,Context ctx) {
+    public void checkBond(String last_name, String phone,
+                          String ivr_code, String lang, Context ctx) {
 
         this.ctx = ctx;
         String body = ("phone=" + phone + "&" + "last_name="
@@ -82,7 +85,7 @@ public class CheckBond extends ResultsActivity {
                 }
 
                 if (debugVar) {
-                System.out.println("DEBUG: " +  resultText);
+                    System.out.println("DEBUG: " + resultText);
                 }
 
                 if (!(resultText.contains("error"))) {
@@ -99,12 +102,23 @@ public class CheckBond extends ResultsActivity {
                     if (debugVar) {
                         System.out.println("DEBUG: " + resultText);
                     }
-                    displayResults(resultText);
 
+                    mHandler.post(new Runnable() {
+
+
+                        @Override
+                        public void run() {
+
+
+                        }
+
+
+                    });
                 }
             }
-        });
 
+
+        });
 
 
     }
